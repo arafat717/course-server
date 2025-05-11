@@ -3,6 +3,7 @@ const app: Application = express();
 import cors from "cors";
 import { CourseRoute } from "./modules/Course/Course.route";
 import { CategoryRoute } from "./modules/category/category.route";
+import { ReviewRoute } from "./modules/review/review.route";
 
 app.use(express.json());
 app.use(cors());
@@ -10,6 +11,7 @@ app.use(cors());
 // application route
 app.use("/api/v1/course", CourseRoute);
 app.use("/api/v1/category", CategoryRoute);
+app.use("/api/v1/review", ReviewRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server is running");
