@@ -10,7 +10,7 @@ interface IDetails {
   description: string;
 }
 
-export interface ICourse extends Document {
+export interface TCourse extends Document {
   title: string;
   instructor: string;
   categoryId: Types.ObjectId;
@@ -32,7 +32,7 @@ const TagSchema = new Schema<ITag>(
   { _id: false }
 );
 
-const CourseSchema = new Schema<ICourse>({
+const CourseSchema = new Schema<TCourse>({
   title: { type: String, required: true, unique: true },
   instructor: { type: String, required: true },
   categoryId: { type: Schema.Types.ObjectId, ref: "Category", required: true },
@@ -53,4 +53,4 @@ const CourseSchema = new Schema<ICourse>({
   },
 });
 
-export const Course = model<ICourse>("Course", CourseSchema);
+export const Course = model<TCourse>("Course", CourseSchema);

@@ -1,4 +1,4 @@
-export interface ICourse {
+export interface TCourse {
   _id: string; // MongoDB ObjectId as string
   title: string;
   instructor: string;

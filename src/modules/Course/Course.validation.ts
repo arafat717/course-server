@@ -6,7 +6,7 @@ export const tagSchema = z.object({
   isDeleted: z.boolean().default(false),
 });
 
-export const courseValidationSchema = z.object({
+export const createCourseValidationSchema = z.object({
   title: z.string().min(1, "Title is required"),
   instructor: z.string().min(1, "Instructor is required"),
   categoryId: z.string().refine((val) => isValidObjectId(val), {
@@ -34,3 +34,7 @@ export const courseValidationSchema = z.object({
     description: z.string().min(1, "Description is required"),
   }),
 });
+
+export const CourseValidations = {
+  createCourseValidationSchema,
+};
