@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start:prod": "node ./dist/server.js",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .mjs,.cjs,.ts",
@@ -16,7 +18,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.12.1"
+    "mongoose": "^8.12.1",
+    "ts-node-dev": "^2.0.0",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
