@@ -5,6 +5,8 @@ import { TCourse } from "./Course.interface";
 import calculateDurationInWeeks, { searchableFields } from "./Course.constant";
 import QueryBuilder from "../../app/builder/QueryBuilder";
 import mongoose from "mongoose";
+import AppError from "../../app/errors/AppError";
+import { Review } from "../review/review.model";
 
 const createCourseIntoDb = async (payload: TCourse) => {
   const durationInWeeks = calculateDurationInWeeks(
@@ -30,6 +32,7 @@ const getAllCourseFromDb = async (query: Record<string, unknown>) => {
   const result = await courseQuery.modelQuery;
   return result;
 };
+
 const getSingleCourseFromDb = async (id: string) => {
   const result = await Course.findById(id);
   return result;
@@ -71,9 +74,57 @@ const updateCourseIntoDb = async (id: string, payload: Partial<TCourse>) => {
   }
 };
 
+const getCourseByIdWithReviewsFromDb = async (courseId: string) => {
+  if (!courseId) {
+    throw new AppError(404, "Course id not found");
+  }
+
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new AppError(404, "Course not found");
+  }
+
+  const review = await Review.find({ courseId });
+
+  return {
+    course,
+    review,
+  };
+};
+
+const getBestCourseFromDb = async () => {
+  const topCourseStat = await Review.aggregate([
+    {
+      $group: {
+        _id: "$courseId",
+        averageRating: { $avg: "$rating" },
+        reviewCount: { $sum: 1 },
+      },
+    },
+    { $sort: { averageRating: -1 } },
+    { $limit: 10 },
+  ]);
+
+  if (!topCourseStat.length) return null;
+
+  const { _id: courseId, averageRating, reviewCount } = topCourseStat[0];
+
+  const course = await Course.findById(courseId);
+
+  if (!course) return null;
+
+  return {
+    course,
+    averageRating,
+    reviewCount,
+  };
+};
+
 export const CourseService = {
   createCourseIntoDb,
   getAllCourseFromDb,
   updateCourseIntoDb,
   getSingleCourseFromDb,
+  getCourseByIdWithReviewsFromDb,
+  getBestCourseFromDb,
 };
