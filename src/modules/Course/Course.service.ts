@@ -30,7 +30,15 @@ const getAllCourseFromDb = async (query: Record<string, unknown>) => {
   return result;
 };
 
+const updateCourseIntoDb = async (id: string, payload: Partial<TCourse>) => {
+  const result = await Course.findByIdAndUpdate(id, payload, {
+    upsert: true,
+  });
+  return result;
+};
+
 export const CourseService = {
   createCourseIntoDb,
   getAllCourseFromDb,
+  updateCourseIntoDb,
 };

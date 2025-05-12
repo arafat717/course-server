@@ -2,6 +2,7 @@ import catchAsync from "../../app/utils/catchAsync";
 import sentResponse from "../../app/utils/sendResponse";
 import status from "http-status";
 import { CategoryService } from "./category.service";
+import { CourseService } from "../Course/Course.service";
 
 const createCategory = catchAsync(async (req, res) => {
   const result = await CategoryService.createCategoryIntoDb(req.body);

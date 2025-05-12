@@ -11,5 +11,10 @@ router.post(
   CourseController.createCourse
 );
 router.get("/", CourseController.getAllCourse);
+router.patch(
+  "/:courseId",
+  validateRequest(CourseValidations.updateCourseValidationSchema),
+  CourseController.updateCourse
+);
 
 export const CourseRoute = router;
