@@ -14,4 +14,13 @@ const calculateDurationInWeeks = (
   return Math.ceil(diffInDays / 7);
 };
 
+export const searchableFields = [
+  "title",
+  "price",
+  "startDate",
+  "endDate",
+  "language",
+  "durationInWeeks",
+];
+
 export default calculateDurationInWeeks;

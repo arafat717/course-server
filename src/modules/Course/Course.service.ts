@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Course } from "./Course.model";
 import { TCourse } from "./Course.interface";
-import calculateDurationInWeeks from "./Course.constant";
+import calculateDurationInWeeks, { searchableFields } from "./Course.constant";
+import QueryBuilder from "../../app/builder/QueryBuilder";
 
 const createCourseIntoDb = async (payload: TCourse) => {
   const durationInWeeks = calculateDurationInWeeks(
@@ -17,6 +18,19 @@ const createCourseIntoDb = async (payload: TCourse) => {
   return result;
 };
 
+const getAllCourseFromDb = async (query: Record<string, unknown>) => {
+  const courseQuery = new QueryBuilder(Course.find(), query)
+    .search(searchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await courseQuery.modelQuery;
+  return result;
+};
+
 export const CourseService = {
   createCourseIntoDb,
+  getAllCourseFromDb,
 };
