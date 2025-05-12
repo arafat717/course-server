@@ -22,7 +22,10 @@ const createCourseIntoDb = async (payload: TCourse) => {
 };
 
 const getAllCourseFromDb = async (query: Record<string, unknown>) => {
-  const courseQuery = new QueryBuilder(Course.find(), query)
+  const courseQuery = new QueryBuilder(
+    Course.find().populate("categoryId"),
+    query
+  )
     .search(searchableFields)
     .filter()
     .sort()
@@ -34,7 +37,7 @@ const getAllCourseFromDb = async (query: Record<string, unknown>) => {
 };
 
 const getSingleCourseFromDb = async (id: string) => {
-  const result = await Course.findById(id);
+  const result = await Course.findById(id).populate("categoryId");
   return result;
 };
 
@@ -79,7 +82,7 @@ const getCourseByIdWithReviewsFromDb = async (courseId: string) => {
     throw new AppError(404, "Course id not found");
   }
 
-  const course = await Course.findById(courseId);
+  const course = await Course.findById(courseId).populate("categoryId");
   if (!course) {
     throw new AppError(404, "Course not found");
   }
@@ -108,14 +111,15 @@ const getBestCourseFromDb = async () => {
   if (!topCourseStat.length) return null;
 
   const { _id: courseId, averageRating, reviewCount } = topCourseStat[0];
+  const averageRatingInTwoDeg = averageRating.toFixed(2);
 
-  const course = await Course.findById(courseId);
+  const course = await Course.findById(courseId).populate("categoryId");
 
   if (!course) return null;
 
   return {
     course,
-    averageRating,
+    averageRatingInTwoDeg,
     reviewCount,
   };
 };
