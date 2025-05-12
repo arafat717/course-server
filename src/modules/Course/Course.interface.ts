@@ -15,7 +15,7 @@ export interface TCourse {
   instructor: string;
   categoryId: Types.ObjectId;
   price: number;
-  tags: ITag;
+  tags: ITag[];
   startDate: string;
   endDate: string;
   language: string;
