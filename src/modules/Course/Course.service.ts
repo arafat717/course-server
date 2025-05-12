@@ -30,6 +30,10 @@ const getAllCourseFromDb = async (query: Record<string, unknown>) => {
   const result = await courseQuery.modelQuery;
   return result;
 };
+const getSingleCourseFromDb = async (id: string) => {
+  const result = await Course.findById(id);
+  return result;
+};
 
 const updateCourseIntoDb = async (id: string, payload: Partial<TCourse>) => {
   const { tags, ...remaining } = payload;
@@ -71,4 +75,5 @@ export const CourseService = {
   createCourseIntoDb,
   getAllCourseFromDb,
   updateCourseIntoDb,
+  getSingleCourseFromDb,
 };
