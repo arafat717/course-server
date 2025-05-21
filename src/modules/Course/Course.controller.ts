@@ -4,7 +4,7 @@ import status from "http-status";
 import { CourseService } from "./Course.service";
 
 const createCourse = catchAsync(async (req, res) => {
-  const result = await CourseService.createCourseIntoDb(req.body);
+  const result = await CourseService.createCourseIntoDb(req.user, req.body);
   sentResponse(res, {
     statusCode: status.OK,
     success: true,
