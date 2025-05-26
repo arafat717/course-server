@@ -10,4 +10,5 @@ export default {
   bcrypt_rount: process.env.BCRYPT_ROUNT,
   access_token: process.env.ACCESS_SCERET,
   ACCESS_SCERET_EXPIREIN: process.env.ACCESS_SCERET_EXPIREIN,
+  super_admin_password: process.env.SUPER_ADMIN_PASSWORD,
 };

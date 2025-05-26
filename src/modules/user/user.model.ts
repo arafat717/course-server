@@ -31,7 +31,7 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["super-admin", "user", "admin"],
       default: "user",
     },
   },

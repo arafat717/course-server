@@ -6,7 +6,7 @@ export type TUser = {
   username: string;
   email: string;
   password: string;
-  role: "user" | "admin";
+  role: "super-admin" | "user" | "admin";
 };
 
 export type TUserRole = keyof typeof USER_ROLE;
