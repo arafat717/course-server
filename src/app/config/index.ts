@@ -11,4 +11,7 @@ export default {
   access_token: process.env.ACCESS_SCERET,
   ACCESS_SCERET_EXPIREIN: process.env.ACCESS_SCERET_EXPIREIN,
   super_admin_password: process.env.SUPER_ADMIN_PASSWORD,
+  CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
 };

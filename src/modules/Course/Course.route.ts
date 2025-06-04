@@ -9,17 +9,33 @@ const router = express.Router();
 
 router.post(
   "/create-course",
-  auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin),
   validateRequest(CourseValidations.createCourseValidationSchema),
   CourseController.createCourse
 );
-router.get("/", CourseController.getAllCourse);
-router.get("/best", CourseController.getBestCourse);
-router.get("/:courseId", CourseController.getSingleCourse);
-router.get("/:courseId/reviews", CourseController.getSingleCourseWhitReviews);
+router.get(
+  "/",
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin, USER_ROLE.user),
+  CourseController.getAllCourse
+);
+router.get(
+  "/best",
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin, USER_ROLE.user),
+  CourseController.getBestCourse
+);
+router.get(
+  "/:courseId",
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin, USER_ROLE.user),
+  CourseController.getSingleCourse
+);
+router.get(
+  "/:courseId/reviews",
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin, USER_ROLE.user),
+  CourseController.getSingleCourseWhitReviews
+);
 router.patch(
   "/:courseId",
-  auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin, USER_ROLE.superAdmin),
   validateRequest(CourseValidations.updateCourseValidationSchema),
   CourseController.updateCourse
 );

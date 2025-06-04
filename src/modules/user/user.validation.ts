@@ -18,6 +18,13 @@ export const userValidationSchema = z.object({
   }),
 });
 
+export const makeAdminValidationSchema = z.object({
+  body: z.object({
+    email: z.string().email("Please enter a valid email address"),
+  }),
+});
+
 export const userValidations = {
   userValidationSchema,
+  makeAdminValidationSchema,
 };

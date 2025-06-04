@@ -5,11 +5,11 @@ const superAdminInfo = {
   username: "Arafat Hossen",
   email: "arafatjibon33@gmail.com",
   password: config.super_admin_password,
-  role: "super-admin",
+  role: "superAdmin",
 };
 
 const seedSuperAdmin = async () => {
-  const isSuperAdminExists = await User.findOne({ role: "super-admin" });
+  const isSuperAdminExists = await User.findOne({ role: "superAdmin" });
   if (!isSuperAdminExists) {
     await User.create(superAdminInfo);
   }

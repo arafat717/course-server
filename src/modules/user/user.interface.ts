@@ -3,10 +3,11 @@ import { Model } from "mongoose";
 import { USER_ROLE } from "./user.constant";
 
 export type TUser = {
+  profileImage?: string;
   username: string;
   email: string;
   password: string;
-  role: "super-admin" | "user" | "admin";
+  role?: "superAdmin" | "user" | "admin";
 };
 
 export type TUserRole = keyof typeof USER_ROLE;

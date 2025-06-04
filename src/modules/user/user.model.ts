@@ -5,6 +5,9 @@ import config from "../../app/config";
 
 const userSchema = new Schema<TUser, UserModel>(
   {
+    profileImage: {
+      type: String,
+    },
     username: {
       type: String,
       required: [true, "Username is required"],
@@ -31,7 +34,7 @@ const userSchema = new Schema<TUser, UserModel>(
     },
     role: {
       type: String,
-      enum: ["super-admin", "user", "admin"],
+      enum: ["superAdmin", "user", "admin"],
       default: "user",
     },
   },
